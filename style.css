@@ -257,7 +257,7 @@ button:nth-child(2):hover{
         font-size: 16px;
         color: #fff;
         text-align: center;
-        margin-top: 90px;
+        margin-top: 290px;
     }
 
     /* Adjust the navlist to be in a single row */
@@ -278,7 +278,7 @@ button:nth-child(2):hover{
     /* Adjust the design circle (image) */
     .design .circle:nth-child(2) {
         position: absolute;
-        top: 95%; /* Move the image down after the paragraph */
+        top: 9%; /* Move the image down after the paragraph */
         left: 50%;
         transform: translateX(-50%);
         width: 100%;
