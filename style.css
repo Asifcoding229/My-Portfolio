@@ -149,11 +149,11 @@ button:nth-child(2):hover{
 
 .circle:nth-child(1){
     background: linear-gradient(90deg, transparent 50%, #000000 50%);
-    width: 440px;
+    width: 400px;
 }
 
 .circle:nth-child(2){
-    width: 370px;
+    width: 330px;
     background-image:url("profile\ pic.jpg ");
     background-size: 100%;
     background-repeat: no-repeat;
