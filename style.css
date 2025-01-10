@@ -244,6 +244,7 @@ button:nth-child(2):hover{
 
     .left-container {
         order: 1; /* Ensure left container appears first */
+        width:100%;
     }
 
     .right-container {
@@ -277,7 +278,7 @@ button:nth-child(2):hover{
     /* Adjust the design circle (image) */
     .design .circle:nth-child(2) {
         position: absolute;
-        top: 90%; /* Move the image down after the paragraph */
+        top: 100%; /* Move the image down after the paragraph */
         left: 50%;
         transform: translateX(-50%);
         width: 100%;
