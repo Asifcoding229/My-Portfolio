@@ -393,3 +393,7 @@ button:nth-child(2):hover{
         background-repeat: no-repeat;
         border: 10px solid white;
         box-shadow: 0 0 10px #fff, inset 0 0 10px #fff, 0 0 30px #00FFFF, inset 0 0 30px #00FFFF, 0 0 50px #00FFFF;
+      }
+
+
+}    
