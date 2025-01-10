@@ -220,6 +220,8 @@ button:nth-child(2):hover{
     .navlist {
         gap: 10px;
     }
+    .design .circle:nth-child(2){
+        width: 250px;
 }
 
 /* Mobile and Tablet Styles */
