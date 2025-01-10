@@ -349,6 +349,7 @@ button:nth-child(2):hover{
         padding: 0;
         width: 300px;
         font-size: 8px;
+        line-height: 3px;
     }
 }
 
