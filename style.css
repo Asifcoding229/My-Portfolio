@@ -360,7 +360,7 @@ button:nth-child(2):hover{
     .left-container h1, .left-container p {
         font-size: 14px; /* Smaller font size for even smaller screens */
     }
-
+   
     .intro {
         font-size: 10px; /* Adjust intro font size */
     }
@@ -379,3 +379,15 @@ button:nth-child(2):hover{
         text-align: left;
         padding: 0
 }
+
+      .design .circle:nth-child(2) {
+        position: absolute;
+        top: 100%; /* Move the image down after the paragraph */
+        left: 50%;
+        transform: translateX(-50%);
+        width: 100%;
+        max-width: 250px; /* Ensure image size remains appropriate */
+        background-size: cover;
+        background-repeat: no-repeat;
+        border: 10px solid white;
+        box-shadow: 0 0 10px #fff, inset 0 0 10px #fff, 0 0 30px #00FFFF, inset 0 0 30px #00FFFF, 0 0 50px #00FFFF;
