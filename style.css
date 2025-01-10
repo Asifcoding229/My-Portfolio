@@ -362,7 +362,7 @@ button:nth-child(2):hover{
     }
 
     .intro {
-        font-size: 14px; /* Adjust intro font size */
+        font-size: 10px; /* Adjust intro font size */
     }
 
     .btn-container button {
@@ -376,4 +376,6 @@ button:nth-child(2):hover{
        font-size: 10px;
         margin-left: 20px;
         margin-right: 20px;
+        text-align: center;
+        
 }
