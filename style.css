@@ -355,7 +355,7 @@ button:nth-child(2):hover{
 
 
 /* Extra Mobile Styling for smaller devices (max-width: 480px) */
-@media screen and (max-width: 480px) {
+@media screen and (max-width: 480px min-width:300px) {
 
     .left-container h1, .left-container p {
         font-size: 14px; /* Smaller font size for even smaller screens */
@@ -377,7 +377,9 @@ button:nth-child(2):hover{
         margin-left: 20px;
         margin-right: 20px;
         text-align: left;
-        padding: 0
+        padding: 0;
+        line-height:0;
+        
 }
 
       .design .circle:nth-child(2) {
