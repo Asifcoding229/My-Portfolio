@@ -279,7 +279,7 @@ button:nth-child(2):hover{
         left: 50%;
         transform: translateX(-50%);
         width: 100%;
-        max-width: 300px; /* Ensure image size remains appropriate */
+        max-width: 250px; /* Ensure image size remains appropriate */
         background-size: cover;
         background-repeat: no-repeat;
         border: 10px solid white;
