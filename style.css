@@ -230,7 +230,7 @@ button:nth-child(2):hover{
     .container {
         flex-direction: column;
         align-items: center;
-        height: 1500px;
+        height: 3000px;
     }
 
     /* Left and Right Containers */
@@ -245,6 +245,7 @@ button:nth-child(2):hover{
     .left-container {
         order: 1; /* Ensure left container appears first */
         width:100%;
+        height:3000px;
     }
 
     .right-container {
