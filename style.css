@@ -282,7 +282,7 @@ button:nth-child(2):hover{
         left: 50%;
         transform: translateX(-50%);
         width: 100%;
-        max-width: 250px; /* Ensure image size remains appropriate */
+        max-width: 50px; /* Ensure image size remains appropriate */
         background-size: cover;
         background-repeat: no-repeat;
         border: 10px solid white;
@@ -344,11 +344,11 @@ button:nth-child(2):hover{
 
     /* Ensure that other sections follow in the correct order */
     .details {
-        
+        text-align:left;
         align-items: left;
         padding: 0;
         width: 300px;
-        font-size: 10px;
+        font-size: 8px;
     }
 }
 
@@ -371,29 +371,7 @@ button:nth-child(2):hover{
     .icons {
         font-size: 20px; /* Reduce icon size */
     }
-    .details{
-        width: 300px;
-       font-size: 8pxpx;
-        margin-left: 20px;
-        margin-right: 10px;
-        text-align: left;
-        padding: 0;
-        line-height:0;
-        
-}
 
-      .design .circle:nth-child(2) {
-        position: relative;
-        top: 95%; /* Move the image down after the paragraph */
-        
-        transform: translateX(-50%);
-        width: 100%;
-        max-width: 50px; /* Ensure image size remains appropriate */
-        background-size: cover;
-        background-repeat: no-repeat;
-        border: 10px solid white;
-        box-shadow: 0 0 10px #fff, inset 0 0 10px #fff, 0 0 30px #00FFFF, inset 0 0 30px #00FFFF, 0 0 50px #00FFFF;
-      }
 
 
 }    
