@@ -278,11 +278,11 @@ button:nth-child(2):hover{
     /* Adjust the design circle (image) */
     .design .circle:nth-child(2) {
         position: absolute;
-        top: 90%; /* Move the image down after the paragraph */
+        top: 95%; /* Move the image down after the paragraph */
         left: 50%;
         transform: translateX(-50%);
         width: 100%;
-        max-width: 50px; /* Ensure image size remains appropriate */
+        max-width: 150px; /* Ensure image size remains appropriate */
         background-size: cover;
         background-repeat: no-repeat;
         border: 10px solid white;
@@ -344,8 +344,8 @@ button:nth-child(2):hover{
 
     /* Ensure that other sections follow in the correct order */
     .details {
-        text-align:left;
-        align-items: left;
+        text-align: center;
+        align-items: center;
         padding: 0;
         width: 300px;
         font-size: 8px;
