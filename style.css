@@ -346,7 +346,7 @@ button:nth-child(2):hover{
     .details {
         display: flex;
         flex-direction: column;
-        align-items: center;
+        align-items: left;
         padding: 0;
         width: 250px;
         font-size: 10px;
@@ -373,9 +373,9 @@ button:nth-child(2):hover{
         font-size: 20px; /* Reduce icon size */
     }
     .details{
-       font-size: 10px;
+       font-size: 8pxpx;
         margin-left: 20px;
-        margin-right: 20px;
+        margin-right: 10px;
         text-align: left;
         padding: 0;
         line-height:0;
@@ -384,8 +384,8 @@ button:nth-child(2):hover{
 
       .design .circle:nth-child(2) {
         position: absolute;
-        top: 100%; /* Move the image down after the paragraph */
-        left: 50%;
+        top: 95%; /* Move the image down after the paragraph */
+        
         transform: translateX(-50%);
         width: 100%;
         max-width: 250px; /* Ensure image size remains appropriate */
