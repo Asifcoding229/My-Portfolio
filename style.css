@@ -1,0 +1,370 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+*{
+    margin: 0px;
+    padding: 0px;
+}
+
+.portfolio-container{
+    min-height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.navlist{
+    display: flex;
+    gap: 40px;
+    height: 100px;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+}
+
+.navlist li{
+    list-style: none;
+}
+
+.navlist li a{
+    text-decoration: none;
+    text-transform: uppercase;
+    color: #fff;
+    position: relative;
+}
+
+.left-container,
+.right-container{
+    height: 1200px;
+    display: flex;
+    align-items: center;
+}
+
+.left-container{
+    background: #000000;
+    width: 70%;
+    padding-left: 30px;
+}
+
+.right-container{
+    background: linear-gradient(-45deg, #00FFFF,#000000 70%);
+    width: 30%;
+}
+
+.icons{
+    color: #bbb;
+    display: flex;
+    flex-direction: column;
+    font-size: 50px;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+}
+
+.content{
+    margin-left: 40px;
+    
+}
+
+.intro{
+    font-size: 20px;
+    color: #fff;
+    animation: p 5s linear;
+}
+
+.content .intro span{
+    color: #00FFFF;
+}
+
+.content h1{
+    font-size: 40px;
+    color: #00FFFF;
+}
+
+.details{
+    font-size: 20px;
+    color: #fff;
+    width: 480px;
+    margin: 15px 0px 40px 0px;
+    line-height: 25px;
+}
+
+.bottom-heading{
+    font-size: 40px;
+    color: #00FFFF;
+    margin: 15px 0 40px 0;
+    margin-top: 800px;
+}
+
+.project-details{
+    font-size: 20px;
+    color: #fff;
+}
+
+.btn-container button{
+   font-size: 15px;
+   padding: 9px;
+   border: 2px solid #00FFFF;
+   border-radius: 5px;
+   cursor: pointer;
+   transition: .5s;
+}
+
+button:nth-child(1){
+    background: #00FFFF;
+    color: #000000;
+}
+
+button:nth-child(2){
+    background: transparent;
+    color: #00FFFF;
+    margin-left: 20px;
+}
+
+button:nth-child(1):hover{
+   background: transparent;
+   color: #00FFFF;
+}
+
+button:nth-child(2):hover{
+    background: #00FFFF;
+    color: #000000;
+}
+
+.icons .fa-brands:hover{
+    cursor: pointer;
+    background: linear-gradient(#fff,#00FFFF);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+
+}
+
+.design .circle{
+    aspect-ratio: 1;
+    position: absolute;
+    border-radius: 50%;
+    top: 50%;
+    left: 70%;
+    transform: translate(-50%,-50%);
+}
+
+.circle:nth-child(1){
+    background: linear-gradient(90deg, transparent 50%, #000000 50%);
+    width: 440px;
+}
+
+.circle:nth-child(2){
+    width: 370px;
+    background-image:url("profile\ pic.jpg ");
+    background-size: 100%;
+    background-repeat: no-repeat;
+    border: 10px solid white;
+    box-shadow: 0 0 10px #fff,
+    inset 0 0 10px #fff,
+    0 0 30px #00FFFF,
+    inset 0 0 30px #00FFFF,
+    0 0 50px #00FFFF
+    ;
+}
+
+.navlist li a::after{
+    content: "";
+    position: absolute;
+    background: #fff;
+    width: 100%;
+    height: 2px;
+    left: 0;
+    bottom: -5px;
+    transform: scaleX(0);
+    transition: transform.3s;
+}
+
+.navlist li a:hover::after{
+    transform: scaleX(1);
+}
+
+#role{
+    color: #00FFFF;
+    white-space: nowrap;
+    overflow: hidden;
+    display: inline-block;
+    width: 0;
+    animation: typing 4s steps(30)
+    1s forwards, blink 0.75s step-end infinite;
+    margin-top: 20px;
+    font-size: 36px;
+    font-weight: bold;
+    line-height: 1.5;
+}
+
+@keyframes typing{
+    0%{
+        width: 0;
+    }
+    100%{
+        width: 100%;
+    }
+}
+
+@keyframes blink{
+    50%{
+        border-bottom: transparent;
+    }
+}
+
+/*Responsiveness*/
+@media screen and (max-width: 1024px) {
+    .left-container, .right-container {
+        flex-direction: column;
+        width: 100%;
+    }
+    .navlist {
+        gap: 10px;
+    }
+}
+
+/* Mobile and Tablet Styles */
+@media screen and (max-width: 768px) {
+    /* Ensure containers stack vertically on smaller screens */
+    .container {
+        flex-direction: column;
+        align-items: center;
+        height: 100%;
+    }
+
+    /* Left and Right Containers */
+    .left-container, .right-container {
+        width: 100%; /* Full width for mobile */
+        margin: 10px 0;
+        display: flex;
+        flex-direction: column; /* Stack the content vertically */
+        align-items: center;
+    }
+
+    .left-container {
+        order: 1; /* Ensure left container appears first */
+    }
+
+    .right-container {
+        order: 2; /* Right container appears after the left container */
+        width: 0;
+    }
+
+    /* Position the intro text below the navlist */
+    .intro {
+        font-size: 16px;
+        color: #fff;
+        text-align: center;
+        margin-top: 90px;
+    }
+
+    /* Adjust the navlist to be in a single row */
+    .navlist {
+        width: 100%;
+        justify-content: center;
+        margin-top: 0px;
+    }
+
+    .navlist li a {
+        font-size: 14px;
+        padding: 10px;
+    }
+
+    .design .circle:nth-child(1){
+        width: 0;
+    }
+    /* Adjust the design circle (image) */
+    .design .circle:nth-child(2) {
+        position: absolute;
+        top: 90%; /* Move the image down after the paragraph */
+        left: 50%;
+        transform: translateX(-50%);
+        width: 100%;
+        max-width: 300px; /* Ensure image size remains appropriate */
+        background-size: cover;
+        background-repeat: no-repeat;
+        border: 10px solid white;
+        box-shadow: 0 0 10px #fff, inset 0 0 10px #fff, 0 0 30px #00FFFF, inset 0 0 30px #00FFFF, 0 0 50px #00FFFF;
+    }
+
+    /* Make sure the text is not overlapping */
+    .content {
+        margin-left: 0;
+        text-align: center;
+    }
+
+    .content .intro span{
+        line-height: 1;
+        margin-top: 0px;
+    }
+    .left-container{
+        margin-top: 0;
+        margin-bottom: 0;
+    }
+    /* Heading and paragraph styling for mobile */
+    .left-container h1, .left-container p {
+        font-size: 16px;
+        text-align: center;
+        padding: 10px;
+    }
+
+    .bottom-heading {
+        font-size: 24px; /* Adjust size for mobile */
+        color: #00FFFF;
+        margin: 20px 0;
+        text-align: center;
+    }
+
+    /* Adjust icon positioning */
+    .icons {
+        position: absolute;
+        left: 10px;
+        top: 35%;
+        transform: translateY(-50%);
+        display: flex;
+        flex-direction: column;
+        font-size: 30px;
+        gap: 20px;
+    }
+
+    .icons .fa-brands {
+        font-size: 30px;
+        cursor: pointer;
+    }
+
+    /* Button container for mobile */
+    .btn-container button {
+        
+        padding: 12px;
+        margin-top: 10px;
+        font-size: 14px;
+    }
+
+    /* Ensure that other sections follow in the correct order */
+    .details {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 0;
+    }
+}
+
+
+/* Extra Mobile Styling for smaller devices (max-width: 480px) */
+@media screen and (max-width: 480px) {
+
+    .left-container h1, .left-container p {
+        font-size: 14px; /* Smaller font size for even smaller screens */
+    }
+
+    .intro {
+        font-size: 14px; /* Adjust intro font size */
+    }
+
+    .btn-container button {
+        font-size: 6px; /* Ensure buttons are legible */
+    }
+
+    .icons {
+        font-size: 20px; /* Reduce icon size */
+    }
+}

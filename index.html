@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+</head>
+<body>
+    <div class="portfolio-container">
+      <ul class="navlist">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="work.html">Work</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="project.html">Project</a></li>
+          
+      </ul>
+
+      <div class="left-container">
+        <div class="icons"> 
+            <i class="fa-brands fa-facebook"></i>
+            <i class="fa-brands fa-linkedin"></i>
+            <i class="fa-brands fa-twitter"></i>
+            <i class="fa-brands fa-codepen"></i>
+
+        </div>
+        <div class="content">
+            <p class="intro">Hello I am
+                <span>Mr. Ali Akbar</span><span id="role"></span>
+            </p>
+             <p class="details">I am a skilled web developer with six months of hands on experience in creating responsive and
+                user-freindly websites. Having a background in content creation, I bring a unique
+                perspectve to webdevelopment, ensuring that both the design and functionality of 
+                websites align with the needs of the audience. With expertise in front-end technologies
+                like Html, CSS, Javascript and Bootstrap, I am dedicated to delivering visually 
+                appealing and seamless user experiences. My passion for continuous learning,
+                along with my creative mindest, allows me to blend technical expertise with 
+                artistic vision in every project I take on.
+             </p>
+             <div class="btn-container">
+                <button>Hire me</button>
+                <button>View Projects</button>
+             </div>
+            </div>
+            <div class="bottom-container">
+            <h3 class="bottom-heading">
+                My Projects Overview
+            </h3>
+
+             <p id="typewriter" class="project-details">
+
+             </p>
+        </div>
+      </div>
+      <div class="right-container"></div>
+        <div class="design">
+            <div class="circle"></div>
+            <div class="circle"></div>
+        </div>
+    </div>
+</body>
+<script type="text/javascript">
+      const roles = ["Content Creator","Full Stack Web Developer","Youtuber","Video Editor"];
+      let currentRoleIndex = 0;
+
+      const roleElement = document.getElementById("role");
+
+      function typeRole(role){
+        let i = 0;
+        roleElement.innerHTML="";
+        roleElement.style.width="0";
+        /*Reset width for typwriter effect*/
+
+        const typingInterval = setInterval(()=>
+          {
+            roleElement.innerHTML += role[i];
+            i++;
+
+            if(i===role.length){
+                clearInterval(typingInterval);
+                setTimeout(()=>
+            deleteRole(role),2000);
+            }
+          },150);
+      }
+
+       function deleteRole(role){
+        let i = role.length-1;
+
+        const deletingInterval = setInterval(() =>
+         { 
+           roleElement.innerHTML = 
+           roleElement.innerHTML.slice(0,i);
+           i--;
+           
+           if(i<0){
+            clearInterval(deletingInterval);
+            currentRoleIndex=(currentRoleIndex+1)%roles.length;
+            setTimeout(()=>
+        typeRole(roles[currentRoleIndex]),500);
+           }
+        }, 100);
+       } 
+
+       window.onload =  () =>{
+        typeRole(roles[currentRoleIndex]);
+       };
+
+       const text = "One of my recent projects is the Pizza Website which I created with Html, CSS and JavaScript.I have created many websites using wordpress. All the websites link and other projects details are in the project section.";
+const typewriter = document.getElementById("typewriter");
+
+function type() {
+  typewriter.textContent = ""; // Clear text content
+  let index = 0;
+
+  function typeChar() {
+    if (index < text.length) {
+      typewriter.textContent += text.charAt(index);
+      index++;
+      setTimeout(typeChar, 100); // Adjust typing speed here
+    } else {
+      setTimeout(type, 1000); // Pause before restarting (1 second here)
+    }
+  }
+
+  typeChar();
+}
+
+type();
+
+
+
+</script>
+</html>
