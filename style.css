@@ -310,7 +310,12 @@ button:nth-child(2):hover{
         padding: 10px;
         
     }
+.left-container p{
+        margin-top:90px;
 
+
+    
+}
     .bottom-heading {
         font-size: 24px; /* Adjust size for mobile */
         color: #00FFFF;
