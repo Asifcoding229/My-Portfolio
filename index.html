@@ -62,33 +62,73 @@
             <div class="circle"></div>
         </div>
     </div>
-<!-- Chat Widget -->
-<div id="chat-widget" style="position: fixed; bottom: 80px; right: 20px; width: 300px; max-height: 400px; display: none; flex-direction: column; background: white; border: 1px solid #ccc; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.3); z-index: 9999;">
-  <div style="background: #007bff; color: white; padding: 10px; border-radius: 10px 10px 0 0;">
-    <strong>Customer Support</strong>
-    <span onclick="toggleChat()" style="float: right; cursor: pointer;">&times;</span>
-  </div>
-  <div id="chat-messages" style="flex: 1; padding: 10px; overflow-y: auto;">
-    <!-- Messages will appear here -->
-  </div>
-  <div style="padding: 10px; border-top: 1px solid #ccc;">
-    <input type="text" id="user-input" placeholder="Type your message..." style="width: 100%; padding: 8px;">
-  </div>
-</div>
-
-<!-- Toggle Button -->
-<div onclick="toggleChat()" style="position: fixed; bottom: 20px; right: 20px; background: #007bff; color: white; padding: 10px 15px; border-radius: 50px; cursor: pointer; z-index: 9999;">
+<!-- Chat Toggle Button -->
+<div id="chat-button" onclick="openChat()" style="
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: #007bff;
+  color: white;
+  padding: 12px 20px;
+  border-radius: 30px;
+  cursor: pointer;
+  z-index: 9999;
+  font-family: sans-serif;
+">
   Need Help?
 </div>
 
+<!-- Chat Widget Box -->
+<div id="chat-box" style="
+  display: none;
+  position: fixed;
+  bottom: 80px;
+  right: 20px;
+  width: 320px;
+  height: 400px;
+  background-color: white;
+  border: 1px solid #ccc;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  font-family: sans-serif;
+">
+  <div style="
+    background-color: #007bff;
+    color: white;
+    padding: 10px;
+    border-radius: 12px 12px 0 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  ">
+    <strong>Support Chat</strong>
+    <span onclick="closeChat()" style="cursor: pointer;">&times;</span>
+  </div>
+  <div id="chat-messages" style="flex: 1; padding: 10px; overflow-y: auto;">
+    <div style="margin-bottom: 10px;">👋 Hello! How can I help you?</div>
+  </div>
+  <div style="padding: 10px; border-top: 1px solid #eee;">
+    <input type="text" id="chat-input" placeholder="Type your message..." style="
+      width: 100%;
+      padding: 8px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    ">
+  </div>
+</div>
+
 <script>
-  function toggleChat() {
-    const chat = document.getElementById("chat-widget");
-    if (chat.style.display === "none") {
-      chat.style.display = "flex";
-    } else {
-      chat.style.display = "none";
-    }
+  function openChat() {
+    document.getElementById("chat-box").style.display = "flex";
+    document.getElementById("chat-button").style.display = "none";
+  }
+
+  function closeChat() {
+    document.getElementById("chat-box").style.display = "none";
+    document.getElementById("chat-button").style.display = "block";
   }
 </script>
 </body>
