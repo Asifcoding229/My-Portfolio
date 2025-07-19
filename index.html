@@ -62,73 +62,68 @@
             <div class="circle"></div>
         </div>
     </div>
-<!-- Chat Toggle Button -->
-<div id="chat-button" onclick="openChat()" style="
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  background-color: #007bff;
-  color: white;
-  padding: 12px 20px;
-  border-radius: 30px;
-  cursor: pointer;
-  z-index: 9999;
-  font-family: sans-serif;
-">
+<!-- Chat Widget Button -->
+<div id="chat-widget-button" 
+     style="position: fixed; bottom: 20px; right: 20px; background-color: #4e73df; color: white; padding: 12px 18px; border-radius: 25px; cursor: pointer; z-index: 1000;">
   Need Help?
 </div>
 
-<!-- Chat Widget Box -->
-<div id="chat-box" style="
-  display: none;
-  position: fixed;
-  bottom: 80px;
-  right: 20px;
-  width: 320px;
-  height: 400px;
-  background-color: white;
-  border: 1px solid #ccc;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-  z-index: 9999;
-  display: flex;
-  flex-direction: column;
-  font-family: sans-serif;
-">
-  <div style="
-    background-color: #007bff;
-    color: white;
-    padding: 10px;
-    border-radius: 12px 12px 0 0;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  ">
-    <strong>Support Chat</strong>
-    <span onclick="closeChat()" style="cursor: pointer;">&times;</span>
+<!-- Chat Window -->
+<div id="chat-window" 
+     style="display: none; position: fixed; bottom: 80px; right: 20px; width: 320px; height: 450px; background-color: white; border-radius: 15px; box-shadow: 0 4px 12px rgba(0,0,0,0.2); z-index: 1000; overflow: hidden; font-family: sans-serif;">
+  
+  <div style="background-color: #4e73df; color: white; padding: 12px; font-weight: bold;">
+    Customer Support
   </div>
-  <div id="chat-messages" style="flex: 1; padding: 10px; overflow-y: auto;">
-    <div style="margin-bottom: 10px;">👋 Hello! How can I help you?</div>
+
+  <div id="chat-messages" style="padding: 10px; height: 340px; overflow-y: auto; display: flex; flex-direction: column;">
+    <!-- Agent's initial message -->
+    <div style="align-self: flex-start; background-color: #f1f0f0; color: black; padding: 8px 12px; border-radius: 10px; margin: 4px 0; max-width: 80%;">
+      Hi, how can I help you?
+    </div>
   </div>
-  <div style="padding: 10px; border-top: 1px solid #eee;">
-    <input type="text" id="chat-input" placeholder="Type your message..." style="
-      width: 100%;
-      padding: 8px;
-      border: 1px solid #ccc;
-      border-radius: 6px;
-    ">
+
+  <div style="display: flex; border-top: 1px solid #ccc;">
+    <input id="chat-input" type="text" placeholder="Type your message..." 
+           style="flex: 1; padding: 10px; border: none; outline: none;" />
+    <button onclick="sendMessage()" 
+            style="padding: 10px; background-color: #4e73df; color: white; border: none; cursor: pointer;">
+      Send
+    </button>
   </div>
 </div>
 
 <script>
-  function openChat() {
-    document.getElementById("chat-box").style.display = "flex";
-    document.getElementById("chat-button").style.display = "none";
-  }
+  const chatButton = document.getElementById('chat-widget-button');
+  const chatWindow = document.getElementById('chat-window');
+  const chatMessages = document.getElementById('chat-messages');
+  const chatInput = document.getElementById('chat-input');
 
-  function closeChat() {
-    document.getElementById("chat-box").style.display = "none";
-    document.getElementById("chat-button").style.display = "block";
+  chatButton.addEventListener('click', () => {
+    chatWindow.style.display = chatWindow.style.display === 'none' ? 'block' : 'none';
+  });
+
+  function sendMessage() {
+    const message = chatInput.value.trim();
+    if (message === '') return;
+
+    // Add user message
+    const userMsg = document.createElement('div');
+    userMsg.textContent = message;
+    userMsg.style = "align-self: flex-end; background-color: #4e73df; color: white; padding: 8px 12px; border-radius: 10px; margin: 4px 0; max-width: 80%;";
+    chatMessages.appendChild(userMsg);
+
+    chatInput.value = '';
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+    
+    // Optional: Simulate bot reply (you can remove this part later if integrating real AI)
+    setTimeout(() => {
+      const botReply = document.createElement('div');
+      botReply.textContent = "Thanks for your message! We'll get back shortly.";
+      botReply.style = "align-self: flex-start; background-color: #f1f0f0; color: black; padding: 8px 12px; border-radius: 10px; margin: 4px 0; max-width: 80%;";
+      chatMessages.appendChild(botReply);
+      chatMessages.scrollTop = chatMessages.scrollHeight;
+    }, 1000);
   }
 </script>
 </body>
