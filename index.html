@@ -62,8 +62,96 @@
             <div class="circle"></div>
         </div>
     </div>
-      <!-- Chat Widget --> <div id="ai-chat-widget" class="chat-widget"> <div class="chat-header"> <h3>💬 Customer Support</h3> <button id="chat-close" style="background:none;border:none;color:white;font-size:20px;cursor:pointer;">×</button> </div> <div id="chat-messages" class="chat-messages"></div> <div class="chat-input-container"> <input type="text" id="chat-input" class="chat-input" placeholder="Type your message..."> <button id="chat-send" class="btn">Send</button> </div> </div> <button id="chat-trigger" class="chat-trigger">💬 Need Help?</button>
-    
+     <style>
+#chatButton {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 50px;
+  padding: 12px 20px;
+  cursor: pointer;
+  z-index: 999;
+}
+
+#chatWindow {
+  position: fixed;
+  bottom: 70px;
+  right: 20px;
+  width: 300px;
+  height: 400px;
+  background: white;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  display: none;
+  flex-direction: column;
+  z-index: 999;
+}
+
+#chatMessages {
+  flex: 1;
+  padding: 10px;
+  overflow-y: auto;
+}
+
+#chatInput {
+  display: flex;
+  border-top: 1px solid #ccc;
+}
+
+#chatInput input {
+  flex: 1;
+  padding: 10px;
+  border: none;
+  border-radius: 0;
+}
+
+#chatInput button {
+  padding: 10px;
+  border: none;
+  background-color: #4CAF50;
+  color: white;
+}
+</style>
+
+<button id="chatButton">Need help?</button>
+
+<div id="chatWindow">
+  <div id="chatMessages"></div>
+  <div id="chatInput">
+    <input type="text" id="userMessage" placeholder="Type your question..." />
+    <button onclick="sendMessage()">Send</button>
+  </div>
+</div>
+
+<script>
+  document.getElementById("chatButton").onclick = function () {
+    const win = document.getElementById("chatWindow");
+    win.style.display = win.style.display === "none" ? "flex" : "none";
+  };
+
+  async function sendMessage() {
+    const input = document.getElementById("userMessage");
+    const msg = input.value;
+    if (!msg) return;
+
+    const chat = document.getElementById("chatMessages");
+    chat.innerHTML += <div><b>You:</b> ${msg}</div>;
+
+    input.value = "";
+
+    const response = await fetch("https://your-n8n-server.com/webhook/chat-support", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ message: msg }),
+    });
+
+    const data = await response.json();
+    chat.innerHTML += <div><b>AI:</b> ${data.reply}</div>;
+  }
+</script>
 </body>
 <script type="text/javascript">
       const roles = ["Content Creator","Web Developer","Youtuber","Video Editor"];
