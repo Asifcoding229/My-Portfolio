@@ -63,202 +63,579 @@
         </div>
     </div>
 <style>
-  #needHelp {
-    position: fixed;
-    bottom: 30px;
-    right: 30px;
-    background-color: #4CAF50;
-    color: white;
-    padding: 12px 18px;
-    border: none;
-    border-radius: 30px;
-    cursor: pointer;
-    font-size: 16px;
-    z-index: 1000;
-  }
+     /* Chat Widget Button */
+        #needHelp {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 24px;
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 1001;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
 
-  #chatArea {
-    display: none;
-    position: fixed;
-    bottom: 30px;
-    right: 30px;
-    width: 340px;
-    height: 450px;
-    background-color: #fff;
-    border: 2px solid #ddd;
-    border-radius: 15px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-    z-index: 999;
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
-  }
+        #needHelp:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 35px rgba(102, 126, 234, 0.4);
+            background: linear-gradient(135deg, #7c8eed 0%, #8a5aa7 100%);
+        }
 
-  .chat-header {
-    background-color: #4CAF50;
-    color: white;
-    padding: 12px;
-    text-align: center;
-    font-weight: bold;
-    border-bottom: 1px solid #ccc;
-  }
+        #needHelp.pulse {
+            animation: pulse 2s infinite;
+        }
 
-  #chatMessages {
-    flex: 1;
-    padding: 12px;
-    overflow-y: auto;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-  }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
 
-  .message {
-    display: flex;
-    align-items: flex-end;
-    max-width: 85%;
-  }
+        /* Chat Area */
+        #chatArea {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 380px;
+            height: 500px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+            z-index: 1000;
+            display: none;
+            flex-direction: column;
+            overflow: hidden;
+            animation: slideIn 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
 
-  .user-msg, .agent-msg {
-    padding: 10px 14px;
-    border-radius: 18px;
-    font-size: 14px;
-    line-height: 1.4;
-  }
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px) scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
 
-  .user-msg {
-    background-color: #DCF8C6;
-    align-self: flex-end;
-    border-bottom-right-radius: 0;
-  }
+        .chat-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-radius: 20px 20px 0 0;
+        }
 
-  .agent-msg {
-    background-color: #F1F0F0;
-    align-self: flex-start;
-    border-bottom-left-radius: 0;
-  }
+        .header-content {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
 
-  .avatar {
-    width: 28px;
-    height: 28px;
-    margin: 0 6px;
-    border-radius: 50%;
-    background-size: cover;
-    background-position: center;
-  }
+        .bot-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+        }
 
-  .agent .avatar {
-    background-image: url('https://cdn-icons-png.flaticon.com/512/4712/4712109.png');
-  }
+        .header-text h3 {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 2px;
+        }
 
-  .user .avatar {
-    background-image: url('https://cdn-icons-png.flaticon.com/512/1144/1144760.png');
-  }
+        .header-text p {
+            font-size: 12px;
+            opacity: 0.9;
+        }
 
-  .chat-input {
-    display: flex;
-    padding: 10px;
-    border-top: 1px solid #ddd;
-  }
+        .close-btn {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 20px;
+            cursor: pointer;
+            padding: 5px;
+            border-radius: 50%;
+            transition: background-color 0.2s;
+        }
 
-  #userInput {
-    flex: 1;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 20px;
-    outline: none;
-  }
+        .close-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
 
-  #sendBtn {
-    margin-left: 10px;
-    padding: 10px 14px;
-    border: none;
-    background-color: #4CAF50;
-    color: white;
-    border-radius: 20px;
-    cursor: pointer;
-  }
-</style>
+        #chatMessages {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            background: #f8fafc;
+        }
 
-<button id="needHelp">Need Help?</button>
+        #chatMessages::-webkit-scrollbar {
+            width: 4px;
+        }
 
-<div id="chatArea">
-  <div class="chat-header">AI Assistant</div>
-  <div id="chatMessages"></div>
-  <div class="chat-input">
-    <input type="text" id="userInput" placeholder="Type your message..." />
-    <button id="sendBtn">Send</button>
-  </div>
-</div>
+        #chatMessages::-webkit-scrollbar-track {
+            background: transparent;
+        }
 
-<script>
-  const needHelpBtn = document.getElementById("needHelp");
-  const chatArea = document.getElementById("chatArea");
-  const chatMessages = document.getElementById("chatMessages");
-  const userInput = document.getElementById("userInput");
-  const sendBtn = document.getElementById("sendBtn");
+        #chatMessages::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 4px;
+        }
 
-  const webhookURL = "https://your-n8n-url.com/webhook/chat"; // Replace with your real webhook
+        .message {
+            display: flex;
+            align-items: flex-end;
+            gap: 8px;
+            max-width: 85%;
+            animation: messageSlideIn 0.3s ease-out;
+        }
 
-  needHelpBtn.addEventListener("click", () => {
-    chatArea.style.display = "flex";
-    needHelpBtn.style.display = "none";
-    addAgentMessage("Hi, how can I help you?");
-  });
+        @keyframes messageSlideIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
 
-  sendBtn.addEventListener("click", sendMessage);
-  userInput.addEventListener("keypress", (e) => {
-    if (e.key === "Enter") sendMessage();
-  });
+        .message.user {
+            align-self: flex-end;
+            flex-direction: row-reverse;
+        }
 
-  function addAgentMessage(text) {
-    const messageContainer = document.createElement("div");
-    messageContainer.classList.add("message", "agent");
+        .message.agent {
+            align-self: flex-start;
+        }
 
-    messageContainer.innerHTML = `
-      <div class="avatar agent"></div>
-      <div class="agent-msg">${text}</div>
-    `;
-    chatMessages.appendChild(messageContainer);
-    chatMessages.scrollTop = chatMessages.scrollHeight;
-  }
+        .message-content {
+            padding: 12px 16px;
+            border-radius: 18px;
+            font-size: 14px;
+            line-height: 1.4;
+            word-wrap: break-word;
+        }
 
-  function addUserMessage(text) {
-    const messageContainer = document.createElement("div");
-    messageContainer.classList.add("message", "user");
+        .user .message-content {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-bottom-right-radius: 6px;
+        }
 
-    messageContainer.innerHTML = `
-      <div class="user-msg">${text}</div>
-      <div class="avatar user"></div>
-    `;
-    chatMessages.appendChild(messageContainer);
-    chatMessages.scrollTop = chatMessages.scrollHeight;
-  }
+        .agent .message-content {
+            background: white;
+            color: #374151;
+            border: 1px solid #e5e7eb;
+            border-bottom-left-radius: 6px;
+        }
 
-  function sendMessage() {
-    const message = userInput.value.trim();
-    if (message === "") return;
+        .avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            flex-shrink: 0;
+        }
 
-    addUserMessage(message);
-    userInput.value = "";
+        .user .avatar {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: white;
+        }
 
-    fetch(webhookURL, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ message: message }),
-    })
-    .then(response => response.json())
-    .then(data => {
-      const reply = data.reply || "Sorry, something went wrong.";
-      addAgentMessage(reply);
-    })
-    .catch(error => {
-      console.error("Error:", error);
-      addAgentMessage("Failed to reach the server.");
-    });
-  }
-</script>
+        .agent .avatar {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .chat-input {
+            padding: 20px;
+            background: white;
+            border-top: 1px solid #e5e7eb;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        #userInput {
+            flex: 1;
+            padding: 12px 16px;
+            border: 1px solid #d1d5db;
+            border-radius: 25px;
+            outline: none;
+            font-size: 14px;
+            transition: border-color 0.2s;
+        }
+
+        #userInput:focus {
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        #sendBtn {
+            width: 44px;
+            height: 44px;
+            border: none;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 16px;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #sendBtn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+        }
+
+        #sendBtn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .typing-indicator {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 16px;
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 18px;
+            border-bottom-left-radius: 6px;
+        }
+
+        .typing-dots {
+            display: flex;
+            gap: 4px;
+        }
+
+        .typing-dots span {
+            width: 6px;
+            height: 6px;
+            background: #9ca3af;
+            border-radius: 50%;
+            animation: typing 1.4s infinite ease-in-out;
+        }
+
+        .typing-dots span:nth-child(1) { animation-delay: -0.32s; }
+        .typing-dots span:nth-child(2) { animation-delay: -0.16s; }
+
+        @keyframes typing {
+            0%, 80%, 100% {
+                transform: scale(0.8);
+                opacity: 0.5;
+            }
+            40% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        .status-indicator {
+            width: 8px;
+            height: 8px;
+            background: #10b981;
+            border-radius: 50%;
+            position: absolute;
+            bottom: 2px;
+            right: 2px;
+            border: 2px solid white;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 480px) {
+            #chatArea {
+                width: calc(100vw - 20px);
+                height: calc(100vh - 20px);
+                bottom: 10px;
+                right: 10px;
+                border-radius: 15px;
+            }
+
+            #needHelp {
+                bottom: 20px;
+                right: 20px;
+            }
+        }
+    </style>
+
+    <!-- Chat Widget Button -->
+    <button id="needHelp" class="pulse">
+        <i class="fas fa-comments"></i>
+    </button>
+
+    <!-- Chat Area -->
+    <div id="chatArea">
+        <div class="chat-header">
+            <div class="header-content">
+                <div class="bot-avatar">
+                    <i class="fas fa-robot"></i>
+                    <div class="status-indicator"></div>
+                </div>
+                <div class="header-text">
+                    <h3>AI Assistant</h3>
+                    <p>We're online now</p>
+                </div>
+            </div>
+            <button class="close-btn" id="closeChat">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        
+        <div id="chatMessages"></div>
+        
+        <div class="chat-input">
+            <input type="text" id="userInput" placeholder="Type your message..." />
+            <button id="sendBtn">
+                <i class="fas fa-paper-plane"></i>
+            </button>
+        </div>
+    </div>
+
+    <script>
+        class ChatWidget {
+            constructor() {
+                this.needHelpBtn = document.getElementById("needHelp");
+                this.chatArea = document.getElementById("chatArea");
+                this.chatMessages = document.getElementById("chatMessages");
+                this.userInput = document.getElementById("userInput");
+                this.sendBtn = document.getElementById("sendBtn");
+                this.closeBtn = document.getElementById("closeChat");
+                
+                // Replace with your actual n8n webhook URL
+                this.webhookURL = "https://your-n8n-webhook-url.com/webhook/chat";
+                
+                this.isOpen = false;
+                this.sessionId = this.generateSessionId();
+                
+                this.init();
+            }
+
+            init() {
+                this.needHelpBtn.addEventListener("click", () => this.openChat());
+                this.closeBtn.addEventListener("click", () => this.closeChat());
+                this.sendBtn.addEventListener("click", () => this.sendMessage());
+                this.userInput.addEventListener("keypress", (e) => {
+                    if (e.key === "Enter" && !e.shiftKey) {
+                        e.preventDefault();
+                        this.sendMessage();
+                    }
+                });
+
+                // Auto-focus input when chat opens
+                this.userInput.addEventListener("focus", () => {
+                    this.needHelpBtn.classList.remove("pulse");
+                });
+            }
+
+            generateSessionId() {
+                return 'chat_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+            }
+
+            openChat() {
+                this.chatArea.style.display = "flex";
+                this.needHelpBtn.style.display = "none";
+                this.isOpen = true;
+                
+                // Add welcome message with delay for better UX
+                setTimeout(() => {
+                    this.addAgentMessage("👋 Hi there! I'm your AI assistant. How can I help you today?");
+                }, 300);
+                
+                // Focus on input
+                setTimeout(() => {
+                    this.userInput.focus();
+                }, 500);
+            }
+
+            closeChat() {
+                this.chatArea.style.display = "none";
+                this.needHelpBtn.style.display = "flex";
+                this.isOpen = false;
+            }
+
+            addAgentMessage(text, isTyping = false) {
+                if (isTyping) {
+                    this.showTypingIndicator();
+                    return;
+                }
+                
+                this.hideTypingIndicator();
+                
+                const messageContainer = document.createElement("div");
+                messageContainer.classList.add("message", "agent");
+
+                messageContainer.innerHTML = `
+                    <div class="avatar">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <div class="message-content">${text}</div>
+                `;
+                
+                this.chatMessages.appendChild(messageContainer);
+                this.scrollToBottom();
+            }
+
+            addUserMessage(text) {
+                const messageContainer = document.createElement("div");
+                messageContainer.classList.add("message", "user");
+
+                messageContainer.innerHTML = `
+                    <div class="message-content">${text}</div>
+                    <div class="avatar">
+                        <i class="fas fa-user"></i>
+                    </div>
+                `;
+                
+                this.chatMessages.appendChild(messageContainer);
+                this.scrollToBottom();
+            }
+
+            showTypingIndicator() {
+                // Remove existing typing indicator
+                this.hideTypingIndicator();
+                
+                const typingContainer = document.createElement("div");
+                typingContainer.classList.add("message", "agent", "typing-message");
+                typingContainer.innerHTML = `
+                    <div class="avatar">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <div class="typing-indicator">
+                        <div class="typing-dots">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                    </div>
+                `;
+                
+                this.chatMessages.appendChild(typingContainer);
+                this.scrollToBottom();
+            }
+
+            hideTypingIndicator() {
+                const typingMessage = this.chatMessages.querySelector(".typing-message");
+                if (typingMessage) {
+                    typingMessage.remove();
+                }
+            }
+
+            scrollToBottom() {
+                this.chatMessages.scrollTop = this.chatMessages.scrollHeight;
+            }
+
+            async sendMessage() {
+                const message = this.userInput.value.trim();
+                if (message === "") return;
+
+                // Disable send button
+                this.sendBtn.disabled = true;
+                
+                // Add user message
+                this.addUserMessage(message);
+                this.userInput.value = "";
+                
+                // Show typing indicator
+                this.showTypingIndicator();
+
+                try {
+                    const response = await fetch(this.webhookURL, {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                        },
+                        body: JSON.stringify({
+                            message: message,
+                            sessionId: this.sessionId,
+                            timestamp: new Date().toISOString(),
+                            userAgent: navigator.userAgent,
+                            url: window.location.href
+                        }),
+                    });
+
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+
+                    const data = await response.json();
+                    
+                    // Simulate typing delay for better UX
+                    setTimeout(() => {
+                        const reply = data.reply || data.message || "I'm sorry, I didn't understand that. Could you please rephrase?";
+                        this.addAgentMessage(reply);
+                    }, 1000 + Math.random() * 1000); // Random delay between 1-2 seconds
+
+                } catch (error) {
+                    console.error("Error:", error);
+                    setTimeout(() => {
+                        this.addAgentMessage("🚫 I'm having trouble connecting right now. Please try again in a moment or contact our support team directly.");
+                    }, 1000);
+                } finally {
+                    // Re-enable send button
+                    this.sendBtn.disabled = false;
+                }
+            }
+        }
+
+        // Initialize the chat widget when DOM is loaded
+        document.addEventListener("DOMContentLoaded", () => {
+            new ChatWidget();
+        });
+
+        // Optional: Add some demo content for testing
+        // Remove this in production
+        window.addEventListener("load", () => {
+            const demoContent = document.createElement("div");
+            demoContent.innerHTML = `
+                <div style="position: fixed; top: 20px; left: 20px; background: rgba(0,0,0,0.8); color: white; padding: 15px; border-radius: 10px; max-width: 300px; font-size: 14px;">
+                    <h4>🚀 Modern Chat Widget Demo</h4>
+                    <p>Click the chat button to test the widget!</p>
+                    <p><strong>Features:</strong></p>
+                    <ul style="margin: 10px 0; padding-left: 20px;">
+                        <li>Modern gradient design</li>
+                        <li>Smooth animations</li>
+                        <li>Typing indicators</li>
+                        <li>Mobile responsive</li>
+                        <li>n8n webhook integration</li>
+                    </ul>
+                    <button onclick="this.parentElement.remove()" style="background: #667eea; border: none; color: white; padding: 5px 10px; border-radius: 5px; cursor: pointer; margin-top: 10px;">Got it!</button>
+                </div>
+            `;
+            document.body.appendChild(demoContent);
+        });
+    </script>
 
 </body>
 <script type="text/javascript">
